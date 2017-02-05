@@ -27,7 +27,7 @@ public class BoyBounce : MonoBehaviour {
 		if (TimeLeft == 10) {
 			rb.velocity = new Vector3 (rb.velocity.x, 100, 0);
 			TimeLeft = 0;
-
+			Application.LoadLevel ("DeathScreen");
 
 		}
 

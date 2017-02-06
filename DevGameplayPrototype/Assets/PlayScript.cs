@@ -11,9 +11,9 @@ public class PlayScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (KeyCode.Mouse0) {
-			Application.LoadLevel ("Level1");
-
+//		if (KeyCode.Mouse0) {
+//			Application.LoadLevel ("Level1");
+		//
 		}
 	}
-}
+

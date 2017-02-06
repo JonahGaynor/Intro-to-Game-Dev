@@ -35,7 +35,7 @@ public class BoyBounce : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (Input.GetKey (KeyCode.Space)) {
-			rb.velocity = new Vector3 (rb.velocity.x, 5, 0);
+			rb.velocity = new Vector3 (rb.velocity.x, 7, 0);
 			TimeLeft++;
 		} 
 		else {

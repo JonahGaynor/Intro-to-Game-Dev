@@ -6,6 +6,7 @@ public class BoyBounce : MonoBehaviour {
 	public Rigidbody2D rb;
 	public SpriteRenderer sr;
 	public int TimeLeft = 0;
+	public int yVelocity = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -24,22 +25,32 @@ public class BoyBounce : MonoBehaviour {
 			rb.velocity = new Vector3 (15, rb.velocity.y, 0);
 			sr.flipX = false;
 		}
+		if (Input.GetKeyUp (KeyCode.Space) && rb.velocity.y==0) {
+			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
+		}
 		if (TimeLeft == 10) {
-			rb.velocity = new Vector3 (rb.velocity.x, 100, 0);
 			TimeLeft = 0;
 			Application.LoadLevel ("DeathScreen");
-
 		}
+
+		Vector3 pos = transform.position;
+
+		float HalfScreenSize = 39.0f;
+
+		pos.x = Mathf.Repeat(pos.x+HalfScreenSize,HalfScreenSize*2)-HalfScreenSize;
+
+		transform.position = pos;
+
 
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (Input.GetKey (KeyCode.Space)) {
-			rb.velocity = new Vector3 (rb.velocity.x, 7, 0);
+			rb.velocity = new Vector3 (rb.velocity.x, 0, 0);
 			TimeLeft++;
 		} 
 		else {
-			rb.velocity = new Vector3 (rb.velocity.x, 50, 0);
+			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
 			TimeLeft = 0;
 		}
 	}

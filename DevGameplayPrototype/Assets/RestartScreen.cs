@@ -6,15 +6,15 @@ public class RestartScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (Input.GetKeyUp (KeyCode.Space)) {
-			Application.LoadLevel ("HomeScreen");
-		}
+//		if (Input.GetKey (KeyCode.Space)) {
+//			Application.LoadLevel ("HomeScreen");
+		//}
 	}
 	
 	// Update is called once per frame
-	void Update () {
+//	void Update () {
 		
-	}
+//	}
 }
 
 

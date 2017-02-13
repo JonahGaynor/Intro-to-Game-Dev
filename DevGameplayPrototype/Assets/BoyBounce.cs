@@ -6,7 +6,7 @@ public class BoyBounce : MonoBehaviour {
 	public Rigidbody2D rb;
 	public SpriteRenderer sr;
 	public int TimeLeft = 0;
-	public int yVelocity = 50;
+	public int yVelocity = 150;
 
 	// Use this for initialization
 	void Start () {

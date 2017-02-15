@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoyBounce : MonoBehaviour {
 	public Rigidbody2D rb;
@@ -25,33 +26,40 @@ public class BoyBounce : MonoBehaviour {
 			rb.velocity = new Vector3 (15, rb.velocity.y, 0);
 			sr.flipX = false;
 		}
-		if (Input.GetKeyUp (KeyCode.Space) && rb.velocity.y==0) {
+		if (Input.GetKeyUp (KeyCode.Space) && rb.velocity.y == 0) {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
-		}
-		if (TimeLeft == 10) {
 			TimeLeft = 0;
-			Application.LoadLevel ("DeathScreen");
+		}
+		if (TimeLeft == 50) {
+			TimeLeft = 0;
+			SceneManager.LoadScene ("DeathScreen");
 		}
 
 		Vector3 pos = transform.position;
 
-		float HalfScreenSize = 39.0f;
+		SpriteRenderer sprtrnd = GameObject.Find ("Background1").GetComponent<SpriteRenderer> ();
 
-		pos.x = Mathf.Repeat(pos.x+HalfScreenSize,HalfScreenSize*2)-HalfScreenSize;
+		float HalfScreenSize = sprtrnd.bounds.extents.x;
+
+		pos.x = Mathf.Repeat (pos.x + HalfScreenSize, HalfScreenSize * 2) - HalfScreenSize;
 
 		transform.position = pos;
 
+		if (Input.GetKey (KeyCode.Space)) {
+			TimeLeft++;
+		}
 
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (Input.GetKey (KeyCode.Space)) {
 			rb.velocity = new Vector3 (rb.velocity.x, 0, 0);
-			TimeLeft++;
 		} 
 		else {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
 			TimeLeft = 0;
 		}
 	}
+
+	
 }

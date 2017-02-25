@@ -7,7 +7,8 @@ public class BoyBounce : MonoBehaviour {
 	public Rigidbody2D rb;
 	public SpriteRenderer sr;
 	public int TimeLeft = 0;
-	public int yVelocity = 150;
+	public int yVelocity = 50;
+	public int velCharge = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +28,8 @@ public class BoyBounce : MonoBehaviour {
 			sr.flipX = false;
 		}
 		if (Input.GetKeyUp (KeyCode.Space) && rb.velocity.y == 0) {
-			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
+			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);
+			velCharge = 0;
 			TimeLeft = 0;
 		}
 		if (TimeLeft == 50) {
@@ -49,16 +51,30 @@ public class BoyBounce : MonoBehaviour {
 			TimeLeft++;
 		}
 
+		if (Input.GetKey (KeyCode.K)) {
+			SceneManager.LoadScene ("DeathScreen");
+		}
+
+	//	if (transform.position.y < MainCamera.position.x - 50) {
+	//		SceneManager.LoadScene ("DeathScreen");
+	//	}
+
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (Input.GetKey (KeyCode.Space)) {
 			rb.velocity = new Vector3 (rb.velocity.x, 0, 0);
-		} 
-		else {
-			rb.velocity = new Vector3 (rb.velocity.x, yVelocity, 0);
-			TimeLeft = 0;
+			TimeLeft++; 
+			if (other.gameObject.name == "ChargePlatform") {
+				velCharge=50;
+			} 
 		}
+		else {
+			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);
+			TimeLeft = 0;
+			velCharge = 0;
+		}
+			
 	}
 
 	

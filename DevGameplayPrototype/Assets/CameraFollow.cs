@@ -14,9 +14,10 @@ public class CameraFollow : MonoBehaviour {
 
 		float oldY = transform.position.y;
 
-		if (targetPosition.y < oldY) {
+		if (targetPosition.y < oldY && Mathf.Abs( target.position.y - transform.position.y) <= 20) {
 			targetPosition.y = oldY;
 		}
+			
 			
 		transform.position = new Vector3 (transform.position.x, targetPosition.y, transform.position.z);
 

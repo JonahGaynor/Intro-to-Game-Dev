@@ -21,11 +21,9 @@ public class RestartScreen : MonoBehaviour {
 		}
 		if (!Input.GetKey (KeyCode.Space)) {
 			haveSeenKeyUp = true;
-			Debug.Log ("AAAAAAH");
 		}
 		else if (Input.GetKeyDown (KeyCode.Space) && haveSeenKeyUp==true) {
 			SceneManager.LoadScene ("HomeScreen");
-			Debug.Log ("FRAMES UP");
 		
 		}
 	}

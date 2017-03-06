@@ -13,14 +13,16 @@ public class DisappearPlatformScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (disappearPlat == true) {
-			Destroy (gameObject);
-		}
+	//	if (disappearPlat == true) {
+	//		Destroy (gameObject);
+	//	}
 	}
 
 	void OnCollisionEnter2D (Collision2D coll) {
-		if (coll.gameObject.name == "RobotBoyRun00" && Input.GetKey (KeyCode.Space)) {
-			disappearPlat = true;
-		}
+		//if (coll.gameObject.name == "RobotBoyRun00" && Input.GetKey (KeyCode.Space)) {
+		Destroy (gameObject);
+			
+		disappearPlat = true;
+		//}
 	}
 }

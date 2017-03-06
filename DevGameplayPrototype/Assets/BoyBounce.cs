@@ -51,9 +51,7 @@ public class BoyBounce : MonoBehaviour {
 			TimeLeft++;
 		}
 
-		if (Input.GetKey (KeyCode.K)) {
-			SceneManager.LoadScene ("DeathScreen");
-		}
+
 
 	//	if (transform.position.y < MainCamera.position.x - 50) {
 	//		SceneManager.LoadScene ("DeathScreen");
@@ -68,6 +66,9 @@ public class BoyBounce : MonoBehaviour {
 			if (other.gameObject.name == "ChargePlatform") {
 				velCharge=50;
 			} 
+		}
+		if (other.gameObject.name == "DisappearPlatform") {
+			rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
 		}
 		else {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);

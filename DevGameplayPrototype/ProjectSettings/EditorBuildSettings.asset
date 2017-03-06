@@ -10,4 +10,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level1.unity
   - enabled: 1
+    path: Assets/Level2.unity
+  - enabled: 1
     path: Assets/DeathScreen.unity
+  - enabled: 1
+    path: Assets/VictoryScreen.unity

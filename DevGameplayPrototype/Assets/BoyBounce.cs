@@ -23,6 +23,7 @@ public class BoyBounce : MonoBehaviour {
 			sr.flipX = true;
 
 		}
+
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			rb.velocity = new Vector3 (15, rb.velocity.y, 0);
 			sr.flipX = false;
@@ -64,12 +65,15 @@ public class BoyBounce : MonoBehaviour {
 			rb.velocity = new Vector3 (rb.velocity.x, 0, 0);
 			TimeLeft++; 
 			if (other.gameObject.name == "ChargePlatform") {
-				velCharge=50;
+				velCharge = 50;
 			} 
-		}
-		if (other.gameObject.name == "DisappearPlatform") {
+		} else if (other.gameObject.name == "DisappearPlatform") {
 			rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
+		} else if (other.gameObject.name == "EndPlatform") {
+			yVelocity = yVelocity + 50;
+			rb.gravityScale = rb.gravityScale + 10;
 		}
+
 		else {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);
 			TimeLeft = 0;

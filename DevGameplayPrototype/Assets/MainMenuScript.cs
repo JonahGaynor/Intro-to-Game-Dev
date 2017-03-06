@@ -13,7 +13,10 @@ public class MainMenuScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			SceneManager.LoadScene ("Level1");
+		}
 
+		if (Input.GetKeyUp (KeyCode.I)) {
+			SceneManager.LoadScene ("InstructionsScreen");
 		}
 	}
 }

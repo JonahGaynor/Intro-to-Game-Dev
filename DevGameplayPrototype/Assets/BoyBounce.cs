@@ -9,6 +9,11 @@ public class BoyBounce : MonoBehaviour {
 	public int TimeLeft = 0;
 	public int yVelocity = 50;
 	public int velCharge = 0;
+	public AudioClip jumpSound;
+	public Sprite SteveAudienceLeftJump;
+	public Sprite SteveAudienceRightJump;
+	public Sprite SteveCharge;
+	public Sprite SteveJump;
 
 	// Use this for initialization
 	void Start () {
@@ -20,18 +25,19 @@ public class BoyBounce : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			rb.velocity = new Vector3 (-15, rb.velocity.y, 0);
-			sr.flipX = true;
-
+			sr.sprite = SteveAudienceLeftJump;
 		}
 
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			rb.velocity = new Vector3 (15, rb.velocity.y, 0);
-			sr.flipX = false;
+			sr.sprite = SteveAudienceRightJump;
 		}
 		if (Input.GetKeyUp (KeyCode.Space) && rb.velocity.y == 0) {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);
+			sr.sprite = SteveJump;
 			velCharge = 0;
 			TimeLeft = 0;
+			GetComponent<AudioSource>().PlayOneShot(jumpSound);
 		}
 		if (TimeLeft == 50) {
 			TimeLeft = 0;
@@ -49,6 +55,7 @@ public class BoyBounce : MonoBehaviour {
 		transform.position = pos;
 
 		if (Input.GetKey (KeyCode.Space)) {
+			sr.sprite = SteveCharge;
 			TimeLeft++;
 		}
 
@@ -69,6 +76,9 @@ public class BoyBounce : MonoBehaviour {
 			} 
 		} else if (other.gameObject.name == "DisappearPlatform") {
 			rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
+			if (other.gameObject.transform.position.y < gameObject.transform.position.y) {
+				GetComponent<AudioSource> ().PlayOneShot (jumpSound);
+			}
 		} else if (other.gameObject.name == "EndPlatform") {
 			yVelocity = yVelocity + 50;
 			rb.gravityScale = rb.gravityScale + 10;
@@ -76,6 +86,9 @@ public class BoyBounce : MonoBehaviour {
 
 		else {
 			rb.velocity = new Vector3 (rb.velocity.x, yVelocity + velCharge, 0);
+			if (other.gameObject.transform.position.y < gameObject.transform.position.y) {
+				GetComponent<AudioSource> ().PlayOneShot (jumpSound);
+			}
 			TimeLeft = 0;
 			velCharge = 0;
 		}

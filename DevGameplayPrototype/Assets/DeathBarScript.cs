@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class DeathBarScript : MonoBehaviour {
 
 	public Transform trans;
-
+	public AudioClip sunSound;
 	public Transform target2;
+
+	bool ifPlaying = false;
 
 
 	// Use this for initialization
@@ -20,8 +22,17 @@ public class DeathBarScript : MonoBehaviour {
 	void Update () {
 		trans.position = new Vector3 (trans.position.x, trans.position.y + 0.25f, 0);
 
-		if (trans.position.y > target2.position.y) {
+		if (trans.position.y+5 > target2.position.y) {
 			SceneManager.LoadScene ("DeathScreen");
+		}
+
+		if (trans.position.y > target2.position.y - 20 && ifPlaying == false) {
+			GetComponent<AudioSource>().PlayOneShot(sunSound);
+			ifPlaying = true;
+		}
+
+		if (trans.position.y <= target2.position.y - 20) {
+			ifPlaying = false;
 		}
 	}
 

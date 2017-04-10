@@ -18,5 +18,8 @@ public class MainMenuScript : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.I)) {
 			SceneManager.LoadScene ("InstructionsScreen");
 		}
+		if (Input.GetKeyUp (KeyCode.C)) {
+			SceneManager.LoadScene ("Credits");
+		}
 	}
 }

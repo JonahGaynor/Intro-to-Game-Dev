@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BoyBounce : MonoBehaviour {
 	public Rigidbody2D rb;
 	public SpriteRenderer sr;
+	public TrailRenderer tr;
 	public int TimeLeft = 0;
 	public int yVelocity = 50;
 	public int velCharge = 0;
@@ -14,15 +15,20 @@ public class BoyBounce : MonoBehaviour {
 	public Sprite SteveAudienceRightJump;
 	public Sprite SteveCharge;
 	public Sprite SteveJump;
+	public GameObject chargeParticle;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
+		tr = GetComponent<TrailRenderer> ();
+		tr.sortingOrder = 49;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			rb.velocity = new Vector3 (-15, rb.velocity.y, 0);
 			sr.sprite = SteveAudienceLeftJump;
@@ -38,6 +44,7 @@ public class BoyBounce : MonoBehaviour {
 			velCharge = 0;
 			TimeLeft = 0;
 			GetComponent<AudioSource>().PlayOneShot(jumpSound);
+			Instantiate (chargeParticle, transform.position, transform.rotation);
 		}
 		if (TimeLeft == 50) {
 			TimeLeft = 0;
@@ -59,11 +66,6 @@ public class BoyBounce : MonoBehaviour {
 			TimeLeft++;
 		}
 
-
-
-	//	if (transform.position.y < MainCamera.position.x - 50) {
-	//		SceneManager.LoadScene ("DeathScreen");
-	//	}
 
 	}
 

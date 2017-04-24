@@ -9,6 +9,7 @@ public class DeathBarScript : MonoBehaviour {
 	public Transform trans;
 	public AudioClip sunSound;
 	public Transform target2;
+	public bool DeadOrNah = false;
 
 	bool ifPlaying = false;
 
@@ -16,6 +17,7 @@ public class DeathBarScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		trans = GetComponent<Transform> ();
+
 	}
 	
 	// Update is called once per frame
@@ -23,7 +25,8 @@ public class DeathBarScript : MonoBehaviour {
 		trans.position = new Vector3 (trans.position.x, trans.position.y + 0.25f, 0);
 
 		if (trans.position.y+5 > target2.position.y) {
-			SceneManager.LoadScene ("DeathScreen");
+			DeadOrNah = true;
+		//	SceneManager.LoadScene ("DeathScreen");
 		}
 
 		if (trans.position.y > target2.position.y - 20 && ifPlaying == false) {

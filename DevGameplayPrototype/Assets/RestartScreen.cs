@@ -8,6 +8,8 @@ public class RestartScreen : MonoBehaviour {
 	bool haveSeenKeyUp = false;
 	bool singleFramePassed = false;
 
+	public AudioClip BLAM;
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,6 +26,7 @@ public class RestartScreen : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown (KeyCode.Space) && haveSeenKeyUp==true) {
 			SceneManager.LoadScene ("HomeScreen");
+			GetComponent<AudioSource>().PlayOneShot(BLAM);
 		
 		}
 	}

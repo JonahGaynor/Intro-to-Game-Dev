@@ -10,7 +10,7 @@ public class AudioManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (haveLoadedAudioManager) {
-			Destroy (gameObject);;
+			Destroy (gameObject);
 		}
 		else {
 			DontDestroyOnLoad(gameObject);

@@ -9,55 +9,72 @@ public class MainMenuScript : MonoBehaviour {
 	int delayVariable = 0;
 	float counter = 100;
 	float mag = 10f;
+	bool creditPress = false;
+	AudioSource pewpewSound;
+
+
 
 	// Use this for initialization
 	void Start () {
-
-
+		pewpewSound = GetComponent<AudioSource> ();
+		pewpewSound.gameObject.SetActive (true);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-			float xPos = Random.Range(-mag, mag);
-			float yPos = Random.Range(-mag, mag);
+		float xPos = Random.Range (-mag, mag);
+		float yPos = Random.Range (-mag, mag);
 
-			if (counter > 0) {
-				transform.position = new Vector3(xPos, yPos, 0);
+		if (counter > 0) {
+			transform.position = new Vector3 (xPos, yPos, 0);
 
-				counter -= Time.deltaTime;
-			}
+			counter -= Time.deltaTime;
+		}
 
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			while (delayVariable < 100) {
 				delayVariable++;
 			}
 			if (delayVariable == 100) {
-				SceneManager.LoadScene ("Level1");
-				GetComponent<AudioSource> ().PlayOneShot (selectSound);
+				delayVariable = 0;
+			}
+			pewpewSound.PlayOneShot (selectSound);
+			SceneManager.LoadScene ("Level1");
+			pewpewSound.gameObject.SetActive (false);
+
+
+		}
+
+		
+
+		if (Input.GetKeyUp (KeyCode.I)) {
+			while (delayVariable < 100) {
+				delayVariable++;
+			}
+			if (delayVariable == 100) {
+				pewpewSound.PlayOneShot (selectSound);
+				SceneManager.LoadScene ("InstructionsScreen");
+				pewpewSound.gameObject.SetActive (false);
+
+				//GetComponent<AudioSource> ().PlayOneShot (selectSound);
 				delayVariable = 0;
 			}
 		}
 
-		if (Input.GetKeyUp (KeyCode.I)) {
-			while (delayVariable < 1000) {
-				delayVariable++;
-			}
-			if (delayVariable == 1000) {
-				SceneManager.LoadScene ("InstructionsScreen");
-				GetComponent<AudioSource> ().PlayOneShot (selectSound);
-				delayVariable = 0;
-			}
-		}
+
 		if (Input.GetKeyUp (KeyCode.C)) {
-			while (delayVariable < 1000) {
-				delayVariable++;
-			}
-			if (delayVariable == 1000) {
+			creditPress = true;
+			//while (creditPress == true) {
+			//	delayVariable++;
+			//}
+			//if (delayVariable == 10) {
+				pewpewSound.PlayOneShot (selectSound);
 				SceneManager.LoadScene ("Credits");
-				GetComponent<AudioSource> ().PlayOneShot (selectSound);
-				delayVariable = 0;
-			}
+				pewpewSound.gameObject.SetActive (false);
+
+			//	delayVariable = 0;
+			//}
 		}
 	}
 }

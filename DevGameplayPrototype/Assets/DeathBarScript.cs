@@ -26,7 +26,7 @@ public class DeathBarScript : MonoBehaviour {
 
 		if (trans.position.y+5 > target2.position.y) {
 			DeadOrNah = true;
-		//	SceneManager.LoadScene ("DeathScreen");
+			SceneManager.LoadScene ("DeathScreen");
 		}
 
 		if (trans.position.y > target2.position.y - 20 && ifPlaying == false) {

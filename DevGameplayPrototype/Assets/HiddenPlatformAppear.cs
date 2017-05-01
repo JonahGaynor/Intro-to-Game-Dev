@@ -17,7 +17,7 @@ public class HiddenPlatformAppear : MonoBehaviour {
 			sr.sortingOrder = 5;
 		} 
 		if (Input.GetKeyUp (KeyCode.Space)) {
-			sr.sortingOrder = 0;
+			sr.sortingOrder = -2;
 		}
 	}
 }

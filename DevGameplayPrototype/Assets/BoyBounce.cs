@@ -17,6 +17,7 @@ public class BoyBounce : MonoBehaviour {
 	public Sprite SteveJump;
 	public GameObject chargeParticle;
 
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
@@ -44,18 +45,29 @@ public class BoyBounce : MonoBehaviour {
 			velCharge = 0;
 			TimeLeft = 0;
 			GetComponent<AudioSource>().PlayOneShot(jumpSound);
-			Instantiate (chargeParticle, transform.position, transform.rotation);
 		}
+
 		if (TimeLeft == 50) {
 			TimeLeft = 0;
 			SceneManager.LoadScene ("DeathScreen");
 		}
+			
+		if (transform.position.x < -18f) {
+			tr.Clear();
+		}
+		if (transform.position.x > 18f) {
+			tr.Clear();
+		}
+	//	if (transform.position.x == 15f) {
+	//		tr.isVisible = true;
+	//	}
 
 		Vector3 pos = transform.position;
 
 		SpriteRenderer sprtrnd = GameObject.Find ("Background1").GetComponent<SpriteRenderer> ();
 
 		float HalfScreenSize = sprtrnd.bounds.extents.x;
+
 
 		pos.x = Mathf.Repeat (pos.x + HalfScreenSize, HalfScreenSize * 2) - HalfScreenSize;
 
@@ -75,6 +87,7 @@ public class BoyBounce : MonoBehaviour {
 			TimeLeft++; 
 			if (other.gameObject.name == "ChargePlatform") {
 				velCharge = 50;
+				Instantiate (chargeParticle, transform.position - Vector3.forward * 10, transform.rotation);
 			} 
 		} else if (other.gameObject.name == "DisappearPlatform") {
 			rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);

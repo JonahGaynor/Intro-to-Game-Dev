@@ -12,31 +12,45 @@ public class CameraFollow : MonoBehaviour {
 	public float moveSpeed = 5f;
 	public bool DeadOrNah = false;
 
+
+
 	// Update is called once per frame
 	void Update () {
+	//	float xPos = Random.Range(-mag, mag);
+	//	float yPos = Random.Range(-mag, mag);
 
-		if (DeadOrNah == true) {
+		/**if (DeadOrNah == true) {
 			float xPos = Random.Range (-mag, mag);
 			float yPos = Random.Range (-mag, mag);
-
-			if (counter > 0) {
+		**/
+		/**	if (counter > 0) {
 				transform.position = new Vector3 (xPos, yPos, 0);
 				counter -= Time.deltaTime;
-			}
+	}**/
+
 			if (counter <= 0) {
 				SceneManager.LoadScene ("DeathScreen");
 			}
-		}
-		
-		Vector2 targetPosition = Vector2.Lerp(transform.position, target.position, moveSpeed * Time.deltaTime);
+	Vector2 targetPosition = Vector2.Lerp(transform.position, target.position, moveSpeed * Time.deltaTime);
 
+		/**	if (Input.GetKey (KeyCode.Space)) {
+				transform.position = new Vector3(xPos, yPos, 0);
+				mag = mag + 0.1f;	
+			}**/
+		transform.position = new Vector3 (transform.position.x, targetPosition.y, transform.position.z);
+
+
+
+
+		
+	/**
 		float oldY = transform.position.y;
 
-	//	if (targetPosition.y < oldY && Mathf.Abs( target.position.y - transform.position.y) <= 20) {
-	//		targetPosition.y = oldY;
-	//	}
-						
-		transform.position = new Vector3 (transform.position.x, targetPosition.y, transform.position.z);
+		if (targetPosition.y < oldY && Mathf.Abs( target.position.y - transform.position.y) <= 20) {
+			targetPosition.y = oldY;
+		}
+	**/					
 
 	}
 }
+

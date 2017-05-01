@@ -21,15 +21,17 @@ public class RestartScreen : MonoBehaviour {
 			singleFramePassed = true;
 			return;
 		}
-		if (!Input.GetKey (KeyCode.Space)) {
+		if (!Input.GetKeyUp (KeyCode.Space)) {
 			haveSeenKeyUp = true;
 		}
-		else if (Input.GetKeyDown (KeyCode.Space) && haveSeenKeyUp==true) {
-			SceneManager.LoadScene ("HomeScreen");
+		if (Input.GetKeyDown (KeyCode.C)) {
 			GetComponent<AudioSource>().PlayOneShot(BLAM);
+		}
+		if (Input.GetKeyUp (KeyCode.C) && haveSeenKeyUp == true) {
+			SceneManager.LoadScene ("HomeScreen");
 		
 		}
 	}
 }
 
-
+//&& haveSeenKeyUp==true
